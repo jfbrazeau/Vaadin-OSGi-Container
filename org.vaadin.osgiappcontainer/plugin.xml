@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="org.vaadin.application" name="Vaadin Application" schema="schema/org.vaadin.application.exsd"/>
+
+   <!-- extension
+         point="org.eclipse.equinox.http.registry.servlets">
+      <servlet
+            alias="/"
+            class="cdo.server.admin.servlet.CdoAdminApplicationServlet"
+            httpcontextId="admin"
+            load-on-startup="true">
+         <init-param
+               name="application"
+               value="cdo.server.admin.ui.app.CdoAdminApp">
+         </init-param>
+         <init-param
+               name="productionMode"
+               value="false">
+         </init-param>
+      </servlet>
+   </extension>
+   <extension
+         point="org.eclipse.equinox.http.registry.httpcontexts">
+      <httpcontext
+            id="admin">
+      </httpcontext>
+   </extension -->
+
+</plugin>
