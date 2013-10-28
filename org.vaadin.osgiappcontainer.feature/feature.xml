@@ -6,11 +6,10 @@
       provider-name="Jean-Francois Brazeau">
 
    <description url="https://github.com/jfbrazeau/Vaadin-OSGi-Container">
-      [Enter Feature Description here.]
+   		Vaadin OSGi Application container.
    </description>
 
-   <copyright url="">
-      Copyright (c) 2013, Jean-Francois Brazeau. All rights reserved.
+   <copyright url=""> Copyright (c) 2013, Jean-Francois Brazeau. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without 
 modification, are permitted provided that the following conditions are met:
@@ -37,8 +36,7 @@ TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
 USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    </copyright>
 
-   <license url="">
-      Copyright (c) 2013, Jean-Francois Brazeau. All rights reserved.
+   <license url="">Copyright (c) 2013, Jean-Francois Brazeau. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without 
 modification, are permitted provided that the following conditions are met:

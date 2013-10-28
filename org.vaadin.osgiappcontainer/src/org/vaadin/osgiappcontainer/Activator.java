@@ -1,15 +1,13 @@
 package org.vaadin.osgiappcontainer;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IContributor;
@@ -29,6 +27,7 @@ import org.osgi.service.http.NamespaceException;
 import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
+import com.google.gwt.dev.util.collect.HashSet;
 import com.vaadin.server.VaadinServlet;
 
 // TODO clear warnings
@@ -130,46 +129,27 @@ public class Activator implements BundleActivator, ServiceTrackerCustomizer {
 				props.put(WIDGETSET_PARAM, widgetset);
 			}
 			
-			// TODO constant
 			props.put(UI_PROVIDER_PARAM, OSGiUIProvider.class.getName());
 			final Bundle uiBundle = getBundle(cfg);
 			props.setProperty(OSGiUIProvider.UI_BUNDLE_PARAM, uiBundle.getSymbolicName());
 			props.setProperty(OSGiUIProvider.UI_CLASS_PARAM, cfg.getAttribute(UI_PARAM));
-			StringBuilder sb = new StringBuilder();
-			for (IConfigurationElement bundleToReloadCfg : cfg.getChildren("bundle-to-reload")) {
-				String bundleId = bundleToReloadCfg.getAttribute("id");
-				if (bundleId != null) {
-					if (Platform.getBundle(bundleId) == null) {
-						logWarn("Bundle '" + bundleId + "' is unknown => ignored.");
-					}
-					else {
-						sb.append(bundleId);
-						sb.append(' ');
-					}
-				}
+			// Retrieve bundles that may contain resources
+			Set<Bundle> resourceProviderBundles = new HashSet<Bundle>();
+			for (IConfigurationElement resourceProviderCfg : extensionRegistryService
+					.getConfigurationElementsFor("org.vaadin.resourceProvider")) {
+				resourceProviderBundles.add(getBundle(resourceProviderCfg));
 			}
-			if (sb.length() > 0) {
-				props.setProperty(OSGiUIProvider.BUNDLES_TO_RELOAD_PARAM, sb.toString());
-			}
+			resourceProviderBundles.add(uiBundle);
 			
 			// Register application bundle
 			Exception exception = null;
 			try {
 				httpService.registerServlet(
 						"/",
-						new VaadinServlet() {
-							@Override
-							public void service(ServletRequest req,
-									ServletResponse res)
-									throws ServletException, IOException {
-								long start = System.currentTimeMillis();
-								super.service(req, res);
-System.out.println("Vaadin request process time : " + (System.currentTimeMillis() - start));
-							}
-						},
+						new VaadinServlet(),
 						props,
 						new OSGiUIHttpContext(httpService
-								.createDefaultHttpContext(), uiBundle));
+								.createDefaultHttpContext(), resourceProviderBundles));
 			} catch (ServletException e) {
 				exception = e;
 			} catch (NamespaceException e) {

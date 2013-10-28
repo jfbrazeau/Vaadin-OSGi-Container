@@ -49,9 +49,6 @@
 
    <element name="vaadin-ui">
       <complexType>
-         <sequence>
-            <element ref="bundle-to-reload" minOccurs="0" maxOccurs="unbounded"/>
-         </sequence>
          <attribute name="ui" type="string" use="required">
             <annotation>
                <documentation>
@@ -70,18 +67,6 @@
             </annotation>
          </attribute>
          <attribute name="productionMode" type="boolean" use="default" value="false">
-            <annotation>
-               <documentation>
-                  
-               </documentation>
-            </annotation>
-         </attribute>
-      </complexType>
-   </element>
-
-   <element name="bundle-to-reload">
-      <complexType>
-         <attribute name="id" type="string" use="required">
             <annotation>
                <documentation>
                   

@@ -2,6 +2,7 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension-point id="org.vaadin.application" name="Vaadin Application" schema="schema/org.vaadin.application.exsd"/>
+   <extension-point id="org.vaadin.resourceProvider" name="Vaadin Resource Provider" schema="schema/org.vaadin.resourceProvider.exsd"/>
 
    <!-- extension
          point="org.eclipse.equinox.http.registry.servlets">
