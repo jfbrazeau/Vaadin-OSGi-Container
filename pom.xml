@@ -11,10 +11,15 @@
 	</properties>
 
 	<repositories>
-		<repository>
+		<!-- repository>
 			<id>Juno 3.8.x</id>
 			<layout>p2</layout>
 			<url>http://download.eclipse.org/eclipse/updates/3.8</url>
+		</repository -->
+		<repository>
+			<id>Kepler</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/releases/kepler/</url>
 		</repository>
 	</repositories>
 
