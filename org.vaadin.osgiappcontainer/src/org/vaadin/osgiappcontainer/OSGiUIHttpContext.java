@@ -29,15 +29,12 @@ public class OSGiUIHttpContext implements HttpContext {
 	
 	@Override
 	public URL getResource(String name) {
-System.out.println("getResource(" + name + ")");
 		URL url = defaultContext.getResource(name);
 		Iterator<Bundle> iterator = resourceProvidersBundles.iterator();
 		while (url == null && iterator.hasNext()) {
 			Bundle bundle = iterator.next();
-System.out.println("  Looking into " + bundle.getSymbolicName() + ")");
 			url = bundle.getResource(name);
 		}
-System.out.println("  url='" + url + "'");
 		return url;
 	}
 	
